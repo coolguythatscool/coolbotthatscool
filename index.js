@@ -5,10 +5,12 @@ const anti_spam = require("discord-anti-spam");
 const settings = require ('./settings.json')
 const clbot = new Cleverbot;
 const bot = new Discord.Client();
-clbot.configure({botapi: "CC54joFR1ZxmgCBFNy_Nt95GplA"});
+clbot.configure({botapi: CL});
 
-const P = settings.prefix;
-const O = settings.ownerid;
+const CL = process.env.cltoken;
+const P = process.env.prefix;
+const O = process.env.ownerid;
+const T = process.env.token;
 
 var fortunes = [
     "Yes",
@@ -426,4 +428,4 @@ bot.on("message", async function(message){
             message.react('\u{26A0}') // Warning Sign
             message.channel.send(`Do \`${P}commands\` for commands. (or \`${P}help\`)`)}});
 
-bot.login(process.env.token);
+bot.login(T);
