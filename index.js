@@ -9,6 +9,7 @@ const CL = process.env.cltoken;
 const P = process.env.prefix;
 const O = process.env.ownerid;
 const T = process.env.token;
+const I = process.env.invite;
 
 clbot.configure({botapi: CL});
 
@@ -137,7 +138,7 @@ bot.on("message", async function(message){
                 return message.reply("Please specify an actual user. Not your imaginary friend.");
             }
             var embedavatar = new Discord.RichEmbed()
-                .setTitle(user)
+                .setTitle(user.username)
                 .setImage(user.user.avatarURL)
                 .setColor(0x1ABC9C)
             return message.channel.send(embedavatar);
