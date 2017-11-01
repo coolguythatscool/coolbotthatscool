@@ -428,7 +428,7 @@ bot.on("message", async function(message){
         
         case "invite":
             var embedinvite = new Discord.RichEmbed()
-                  .addField('**Invite this bot to your server!**', [Invite Link](https://discordapp.com/oauth2/authorize?client_id=374281104485777409&scope=bot&permissions=1341643969))
+                  .addField('**Invite this bot to your server!**', [Invite](https://discordapp.com/oauth2/authorize?client_id=374281104485777409&scope=bot&permissions=1341643969))
                   .setColor(0x0AA99C)
             message.channel.send(embedinvite)
             break;
