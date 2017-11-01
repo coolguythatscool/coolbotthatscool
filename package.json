@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Bot for the Social Hangout Discord server: https://discord.gg/mZt3bqa",
   "main": "index.js",
-  "node": "9.0.0",
+  "engines": {
+    "node": "9.0.0",
+    "npm": "5.5.1"
+  },
   "scripts": {
     "test": "node index.js"
   },
