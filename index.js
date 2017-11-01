@@ -424,6 +424,12 @@ bot.on("message", async function(message){
             message.channel.send(embedserverinfo)
             break;
 
+        
+        case "invite":
+            var embedinvite = new Discord.RichEmbed()
+                  .addFiled('**Invite this bot to your server!**', [link](I))
+                  
+
 
         default:
             message.react('\u{26A0}') // Warning Sign
