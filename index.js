@@ -426,4 +426,4 @@ bot.on("message", async function(message){
             message.react('\u{26A0}') // Warning Sign
             message.channel.send(`Do \`${P}commands\` for commands. (or \`${P}help\`)`)}});
 
-bot.login(settings.token);
+bot.login(process.env.token);
