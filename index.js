@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const superagent = require("superagent");
 const Cleverbot = require("cleverbot-node");
 const anti_spam = require("discord-anti-spam");
-const settings = require ('./settings.json')
 const clbot = new Cleverbot;
 const bot = new Discord.Client();
 clbot.configure({botapi: CL});
