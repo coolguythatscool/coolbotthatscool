@@ -4,12 +4,13 @@ const Cleverbot = require("cleverbot-node");
 const anti_spam = require("discord-anti-spam");
 const clbot = new Cleverbot;
 const bot = new Discord.Client();
-clbot.configure({botapi: CL});
 
 const CL = process.env.cltoken;
 const P = process.env.prefix;
 const O = process.env.ownerid;
 const T = process.env.token;
+
+clbot.configure({botapi: CL});
 
 var fortunes = [
     "Yes",
