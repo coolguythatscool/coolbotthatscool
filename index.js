@@ -446,6 +446,7 @@ bot.on("message", async function(message){
             var time = process.uptime();
             var uptime = (time + "").toHHMMSS();
             message.channel.send(`The bot's uptime is: ${uptime}`);
+            break;
              
 
         default:
