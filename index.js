@@ -440,7 +440,8 @@ bot.on("message", async function(message){
         
         case "invite":
             var embedinvite = new Discord.RichEmbed()
-                  .addFiled('**Invite this bot to your server!**', [link](I))
+                  .addField('**Invite this bot to your server!**', [Link](I))
+            message.channel.send(embedinvite)
             
         case "uptime":
             var time = process.uptime();
