@@ -43,6 +43,51 @@ const clean = text => {
         return text;
   }
 
+function hook(channel, title, message, color, avatarURL) {
+    if (!channel) channel = message.channel;
+    if (!title) return console.log('Title not specified');
+    if (!message) return console.log('Message not specified');
+    if (!color) color = '0AA99C';
+    if (!avatar) avatar = 'http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/exclamation-mark.png'
+
+    color = color.replace(/\s/g, '');
+    avatar = avatar.replace(/\s/g, '');
+
+    channel.fetchWebhooks()
+        .then(webhook => {
+
+            let foundHook = webhook.find('name', 'coolbotthatscool');
+
+            if (!foundHook) {
+                channel.createWebhook('coolbothatscool', 'http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/exclamation-mark.png')
+                    .then(webhook => {
+                        webhook.send('', {
+                            "username": title,
+                            "avatarURL": avatar,
+                            "embeds": [{
+                                "color": parseInt(`0x${color}`),
+                                "description": message
+                            }]
+                        })
+                            .catch(error => {
+                                return channel.send(`**Something went wrong when sending the webhook. Error: ${error}`)
+                            })
+                    })
+            } else {
+                foundHook.send('', {
+                    "username": title,
+                    "avatarURL": avatar,
+                    "embeds": [{
+                        "color": parseInt(`0x${color}`),
+                        "description": message
+                    }]
+                })
+                    .catch(error => {
+                        return channel.send(`**Something went wrong when sending the webhook. Error: ${error}`)
+                    })
+            }
+        })
+}
 
 //anti_spam(bot, {
 //    warnBuffer: 3, //Maximum amount of messages allowed to send in the interval time before getting warned.
@@ -421,18 +466,25 @@ bot.on("message", async function(message){
                   .addField(":page_facing_up:  **ID**", `${message.guild.id}`, true)
                   .addField(":couple: **Members**", `${message.guild.memberCount}`, true)
                   .addField(":map: **Region**", `${message.guild.region}`, true)
-                  .setColor(0x0AA99C)
             message.channel.send(embedserverinfo)
             break;
 
         
         case "invite":
             var embedinvite = new Discord.RichEmbed()
-                  .addField('**Invite this bot to your server!**', [Invite]('https://discordapp.com/oauth2/authorize?client_id=374281104485777409&scope=bot&permissions=1341643969'))
-                  .setColor(0x0AA99C)
-            message.channel.send(embedinvite)
-            break;
+                  .addFiled('**Invite this bot to your server!**', [link](I))
+                  
 
+        case "hook":
+            message.delete();
+
+            if (msg === P + 'hook') {
+                return hook(message.channel, 'Hook Usage', `${P}hook <title>, <message>, [HEXcolor], [avatarURL]\n\n**<> is required\n[] is optional**`,'0AA99C','http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/exclamation-mark.png')
+            }
+            
+            let hookArgs = message.content.slice(P.length + 4).split(",");
+
+            hook (message.channel, hookArgs[0], hookArgs[1], hookArgs[2], hookArgs[3]);
 
         default:
             message.react('\u{26A0}') // Warning Sign
