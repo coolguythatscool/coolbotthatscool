@@ -442,13 +442,22 @@ bot.on("message", async function(message){
             var embedinvite = new Discord.RichEmbed()
                   .addField('**Invite this bot to your server!**', [Link](I))
             message.channel.send(embedinvite)
+            break;
             
+
         case "uptime":
             var time = process.uptime();
             var uptime = (time + "").toHHMMSS();
             message.channel.send(`The bot's uptime is: ${uptime}`);
             break;
-             
+
+        
+        case "status":
+            const params = message.content.split(' ').slice(1);
+            const setStatus = params.join(" ");
+            bot.setGame(setStatus)
+            message.channel.send(`Set the bots game status to: ${setStatus}`)
+            break;
 
         default:
             message.react('\u{26A0}') // Warning Sign
