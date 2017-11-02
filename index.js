@@ -29,11 +29,7 @@ String.prototype.toHHMMSS = function () {
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
-    var time = new Discord.RichEmbed()
-                    .setTitle('Bot Uptime')
-                    .addField('Hours', `${hours}`, true)
-                    .addField('Minutes', `${minutes}`, true)
-                    .addField('Seconds', `${seconds}`, true)
+    var time    = hours+'hrs : '+minutes+'mins : '+seconds+'secs';
     return time;
 }
 
