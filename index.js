@@ -20,6 +20,19 @@ var fortunes = [
     "Maybe"
 ];
 
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
+}
+
 bot.on("ready", ready => {
     console.log('Ready to rumble!')
 })
@@ -428,6 +441,11 @@ bot.on("message", async function(message){
         case "invite":
             var embedinvite = new Discord.RichEmbed()
                   .addFiled('**Invite this bot to your server!**', [link](I))
+            
+        case "uptime":
+            var time = process.uptime();
+            var uptime = (time + "").toHHMMSS();
+            message.channel.send(`The bot's uptime is: ${uptime}`);
              
 
         default:
