@@ -502,9 +502,9 @@ bot.on("message", async function(message){
             }
     
             let user1 = msg.mentions.users.first();
-            let member = msg.guild.member(user1);
+            let member1 = msg.guild.member(user1);
     
-            if (!member) {
+            if (!member1) {
                 throw 'That member could not be found!';
             }
     
@@ -513,11 +513,11 @@ bot.on("message", async function(message){
             const daysCreated = millisCreated / 1000 / 60 / 60 / 24;
     
             //How long about the user joined the server
-            const millisJoined = new Date().getTime() - member.joinedAt.getTime();
+            const millisJoined = new Date().getTime() - member1.joinedAt.getTime();
             const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
     
             // Slice off the first item (the @everyone)
-            let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
+            let roles = member1.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
             if (roles.length < 1) roles = ['None'];
     
             let embed = bot.utils.embed(
@@ -542,7 +542,7 @@ bot.on("message", async function(message){
                     },
                     {
                         name: 'Joined On',
-                        value: `${dateFormat(member.joinedAt)}`,
+                        value: `${dateFormat(member1.joinedAt)}`,
                     },
                     {
                         name: 'Days Since Joining',
