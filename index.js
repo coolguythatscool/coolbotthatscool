@@ -427,13 +427,13 @@ bot.on("message", async function(message){
         
         case "invite":
             var embedinvite = new Discord.RichEmbed()
-                  .addField('**Invite this bot to your server!**', [Link](I))
+                  .addField('**Invite this bot to your server!**', `${[Link](I)}`)
             message.channel.send(embedinvite)
             break;
             
 
         case "uptime":
-            let uptime = client.uptime;
+                let uptime = client.uptime;
         
                 let days = 0;
                 let hours = 0;
@@ -475,10 +475,8 @@ bot.on("message", async function(message){
                                     .addField('**Minutes**', `${minutes}`)
                                     .addField('**Seconds**', `${seconds}`)
                 message.channel.send(embeduptime);
-        
-            }
             break;
-
+            
         
         case "status":
             const params = message.content.split(' ').slice(1);
