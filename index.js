@@ -20,19 +20,6 @@ var fortunes = [
     "Maybe"
 ];
 
-String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    var time    = '`'+hours+'hrs : '+minutes+'mins : '+seconds+'secs`';
-    return time;
-}
-
 bot.on("ready", ready => {
     console.log('Ready to rumble!')
 })
@@ -446,15 +433,56 @@ bot.on("message", async function(message){
             
 
         case "uptime":
-            var time = process.uptime();
-            var uptime = (time + "").toHHMMSS();
-            message.channel.send(`The bot's uptime is: ${uptime}`);
+        let uptime = client.uptime;
+        
+            let days = 0;
+            let hours = 0;
+            let minutes = 0;
+            let seconds = 0;
+            let notCompleted = true;
+        
+            while (notCompleted) {
+        
+                if (uptime >= 8.64e+7) {
+        
+                    days++;
+                    uptime -= 8.64e+7;
+        
+                } else if (uptime >= 3.6e+6) {
+        
+                    hours++;
+                    uptime -= 3.6e+6;
+        
+                } else if (uptime >= 60000) {
+        
+                    minutes++;
+                    uptime -= 60000;
+        
+                } else if (uptime >= 1000) {
+                    seconds++;
+                    uptime -= 1000;
+        
+                }
+        
+                if (uptime < 1000)  notCompleted = false;
+        
+            }
+            var embeduptime = new Discord.RichEmbed()
+                                    .setTitle('Bot\'s Uptime')
+                                    .setThumbnail('https://static.comicvine.com/uploads/original/12/126068/4533928-7tak4g8ta.gif')
+                                    .addField('**Days**', `${days}`)
+                                    .addField('**Hours**', `${hours}`)
+                                    .addField('**Minutes**', `${minutes}`)
+                                    .addField('**Seconds**', `${seconds}`)
+            message.channel.send(embeduptime);
+        
+        }
             break;
 
         
         case "status":
-            const paramsStat = message.content.split(' ').slice(1);
-            const setStatus = paramsStat.join(" ");
+            const params = message.content.split(' ').slice(1);
+            const setStatus = params.join(" ");
             bot.setGame(setStatus)
             message.channel.send(`Set the bots game status to: ${setStatus}`)
             break;
