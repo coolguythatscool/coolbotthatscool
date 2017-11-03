@@ -433,50 +433,50 @@ bot.on("message", async function(message){
             
 
         case "uptime":
-        let uptime = client.uptime;
+            let uptime = client.uptime;
         
-            let days = 0;
-            let hours = 0;
-            let minutes = 0;
-            let seconds = 0;
-            let notCompleted = true;
+                let days = 0;
+                let hours = 0;
+                let minutes = 0;
+                let seconds = 0;
+                let notCompleted = true;
         
-            while (notCompleted) {
+                while (notCompleted) {
         
-                if (uptime >= 8.64e+7) {
+                    if (uptime >= 8.64e+7) {
         
-                    days++;
-                    uptime -= 8.64e+7;
+                        days++;
+                        uptime -= 8.64e+7;
         
-                } else if (uptime >= 3.6e+6) {
+                    } else if (uptime >= 3.6e+6) {
         
-                    hours++;
-                    uptime -= 3.6e+6;
+                        hours++;
+                        uptime -= 3.6e+6;
         
-                } else if (uptime >= 60000) {
+                    } else if (uptime >= 60000) {
         
-                    minutes++;
-                    uptime -= 60000;
+                        minutes++;
+                        uptime -= 60000;
         
-                } else if (uptime >= 1000) {
-                    seconds++;
-                    uptime -= 1000;
+                    } else if (uptime >= 1000) {
+                        seconds++;
+                        uptime -= 1000;
+        
+                    }
+        
+                    if (uptime < 1000)  notCompleted = false;
         
                 }
-        
-                if (uptime < 1000)  notCompleted = false;
-        
-            }
-            var embeduptime = new Discord.RichEmbed()
+                var embeduptime = new Discord.RichEmbed()
                                     .setTitle('Bot\'s Uptime')
                                     .setThumbnail('https://static.comicvine.com/uploads/original/12/126068/4533928-7tak4g8ta.gif')
                                     .addField('**Days**', `${days}`)
                                     .addField('**Hours**', `${hours}`)
                                     .addField('**Minutes**', `${minutes}`)
                                     .addField('**Seconds**', `${seconds}`)
-            message.channel.send(embeduptime);
+                message.channel.send(embeduptime);
         
-        }
+            }
             break;
 
         
