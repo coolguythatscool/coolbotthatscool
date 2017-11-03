@@ -421,6 +421,7 @@ bot.on("message", async function(message){
                   .addField(":page_facing_up:  **ID**", `${message.guild.id}`, true)
                   .addField(":couple: **Members**", `${message.guild.memberCount}`, true)
                   .addField(":map: **Region**", `${message.guild.region}`, true)
+                  .setColor(0x0AA99C)
             message.channel.send(embedserverinfo)
             break;
 
@@ -428,6 +429,7 @@ bot.on("message", async function(message){
         case "invite":
             var embedinvite = new Discord.RichEmbed()
                   .addField('**Invite this bot to your server!**', `${[Link](I)}`)
+                  .setColor(0x0AA99C)
             message.channel.send(embedinvite)
             break;
             
@@ -474,6 +476,7 @@ bot.on("message", async function(message){
                                     .addField('**Hours**', `${hours}`, true)
                                     .addField('**Minutes**', `${minutes}`, true)
                                     .addField('**Seconds**', `${seconds}`, true)
+                                    .setColor(0x0AA99C)
                 message.channel.send(embeduptime);
             break;
             
