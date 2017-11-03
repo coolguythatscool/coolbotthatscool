@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const superagent = require("superagent");
 const Cleverbot = require("cleverbot-node");
 const anti_spam = require("discord-anti-spam");
-const dateFormat = require('dateformat');
 const clbot = new Cleverbot;
 const bot = new Discord.Client();
 
@@ -12,7 +11,6 @@ const O = process.env.ownerid;
 const T = process.env.token;
 const I = process.env.invite;
 
-dateFormat('mmmm dS, dddd, yyyy, h:MM:ss TT');
 clbot.configure({botapi: CL});
 
 var fortunes = [
@@ -490,75 +488,26 @@ bot.on("message", async function(message){
             message.channel.send(`Set the bots game status to: ${setStatus}`)
             break;
 
-        
+
         case "userinfo":
-            if (!msg.guild) {
-                throw 'This can only be used in a guild!';
-            }
-    
-            //Makes sure user mentions a user to get info for
-            if (msg.mentions.users.size < 1) {
-                throw '@mention someone to find the info';
-            }
-    
-            let user1 = msg.mentions.users.first();
-            let member1 = msg.guild.member(user1);
-    
-            if (!member1) {
-                throw 'That member could not be found!';
-            }
-    
-            //How long ago the account was created
-            const millisCreated = new Date().getTime() - user1.createdAt.getTime();
-            const daysCreated = millisCreated / 1000 / 60 / 60 / 24;
-    
-            //How long about the user joined the server
-            const millisJoined = new Date().getTime() - member1.joinedAt.getTime();
-            const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
-    
-            // Slice off the first item (the @everyone)
-            let roles = member1.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
-            if (roles.length < 1) roles = ['None'];
-    
-            let embeduserinfo = bot.utils.embed(
-                `${user.username}#${msg.mentions.users.first().discriminator}`,
-                [
-                    {
-                        name: 'Status',
-                        value: `${user1.presence.status[0].toUpperCase() + user1.presence.status.slice(1)}`,
-                    },
-                    {
-                        name: 'Game',
-                        value: `${(user1.presence.game && user1.presence.game && user1.presence.game.name) || 'Not playing a game.'}`,
-                    },
-                    {
-                        name: 'Created On',
-                        value: `${dateFormat(user1.createdAt)}`,
-                    },
-                    {
-                        name: 'Days Since Creation',
-                        value: `${daysCreated.toFixed(0)}`,
-                    },
-                    {
-                        name: 'Joined On',
-                        value: `${dateFormat(member1.joinedAt)}`,
-                    },
-                    {
-                        name: 'Days Since Joining',
-                        value: `${daysJoined.toFixed(0)}`,
-                    },
-                    {
-                        name: 'Roles',
-                        value: `${roles.join(', ')}`,
-                        inline: false,
-                    },
-                ],
-                {
-                    inline: true,
-                    footer: `User ID: ${user1.id}`,
-                    thumbnail: user1.displayAvatarURL
-                }
-            );
+                let info = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+                if(!info) return message.channel.sendMessage("You did not specify a user Mention");
+            let member1 = message.mentions.members.first();
+            let mention1 = message.mentions.users.first();
+            let embeduserinfo = new Discord.RichEmbed()
+                .setDescription(`This is the info about **@${mention1.username}#${mention1.discriminator}**`)
+                .setColor(0x0AA99C)
+                .setThumbnail(`${member1.user.avatarURL}`)
+                .addField("**Username : **", `${mention1.username}`, true)
+                .addField("**User Discriminator :**", `#${mention1.discriminator}`, true)
+                .addField("**User ID :**", `${member1.id}`, true)
+                .addField("**Playing :**", `${member1.user.presence.game === null ? "No Game" : member1.user.presence.game.name}`, true) 
+                .addField("**NickName :**", `${member1.nickname}`, true)
+                .addField("**Roles :**", `${member1.roles.map(r => r.name).join(" -> ")}`)
+                .addField("**Joined Guild :**", `${message.guild.joinedAt}`)
+                .addField("**Joined Discord :**", `${member1.user.createdAt}`)
+                .setFooter(`User that triggered command -> ${message1.author.username}#${mention1.discriminator}`)
+            message.channel.send({ embed: embeduserinfo});
             break;
 
         default:
