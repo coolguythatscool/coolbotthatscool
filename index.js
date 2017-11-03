@@ -472,10 +472,10 @@ bot.on("message", async function(message){
                 var embeduptime = new Discord.RichEmbed()
                                     .setTitle('Bot\'s Uptime')
                                     .setThumbnail('https://static.comicvine.com/uploads/original/12/126068/4533928-7tak4g8ta.gif')
-                                    .addField('**Days**', `${days}`, true)
-                                    .addField('**Hours**', `${hours}`, true)
-                                    .addField('**Minutes**', `${minutes}`, true)
-                                    .addField('**Seconds**', `${seconds}`, true)
+                                    .addField('**Days**', `${days}`)
+                                    .addField('**Hours**', `${hours}`)
+                                    .addField('**Minutes**', `${minutes}`)
+                                    .addField('**Seconds**', `${seconds}`)
                                     .setColor(0x0AA99C)
                 message.channel.send(embeduptime);
             break;
