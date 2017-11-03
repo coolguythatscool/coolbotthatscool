@@ -479,8 +479,8 @@ bot.on("message", async function(message){
             
         
         case "status":
-            const params = message.content.split(' ').slice(1);
-            const setStatus = params.join(" ");
+            const paramsstat = message.content.split(' ').slice(1);
+            const setStatus = paramsstat.join(" ");
             bot.setGame(setStatus)
             message.channel.send(`Set the bots game status to: ${setStatus}`)
             break;
