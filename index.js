@@ -501,15 +501,15 @@ bot.on("message", async function(message){
                 throw '@mention someone to find the info';
             }
     
-            let user = msg.mentions.users.first();
-            let member = msg.guild.member(user);
+            let user1 = msg.mentions.users.first();
+            let member = msg.guild.member(user1);
     
             if (!member) {
                 throw 'That member could not be found!';
             }
     
             //How long ago the account was created
-            const millisCreated = new Date().getTime() - user.createdAt.getTime();
+            const millisCreated = new Date().getTime() - user1.createdAt.getTime();
             const daysCreated = millisCreated / 1000 / 60 / 60 / 24;
     
             //How long about the user joined the server
@@ -526,15 +526,15 @@ bot.on("message", async function(message){
                 [
                     {
                         name: 'Status',
-                        value: `${user.presence.status[0].toUpperCase() + user.presence.status.slice(1)}`,
+                        value: `${user1.presence.status[0].toUpperCase() + user1.presence.status.slice(1)}`,
                     },
                     {
                         name: 'Game',
-                        value: `${(user.presence.game && user.presence.game && user.presence.game.name) || 'Not playing a game.'}`,
+                        value: `${(user1.presence.game && user1.presence.game && user1.presence.game.name) || 'Not playing a game.'}`,
                     },
                     {
                         name: 'Created On',
-                        value: `${dateFormat(user.createdAt)}`,
+                        value: `${dateFormat(user1.createdAt)}`,
                     },
                     {
                         name: 'Days Since Creation',
@@ -556,8 +556,8 @@ bot.on("message", async function(message){
                 ],
                 {
                     inline: true,
-                    footer: `User ID: ${user.id}`,
-                    thumbnail: user.displayAvatarURL
+                    footer: `User ID: ${user1.id}`,
+                    thumbnail: user1.displayAvatarURL
                 }
             );
     
