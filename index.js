@@ -520,9 +520,8 @@ bot.on("message", async function(message){
             let roles = member1.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
             if (roles.length < 1) roles = ['None'];
     
-            let embed = bot.utils.embed(
+            let embeduserinfo = bot.utils.embed(
                 `${user.username}#${msg.mentions.users.first().discriminator}`,
-                '***This message will dissappear in 60 seconds.***',
                 [
                     {
                         name: 'Status',
@@ -560,8 +559,6 @@ bot.on("message", async function(message){
                     thumbnail: user1.displayAvatarURL
                 }
             );
-    
-            (await msg.edit({ embed })).delete(60000);
             break;
 
         default:
