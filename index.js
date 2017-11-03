@@ -433,7 +433,7 @@ bot.on("message", async function(message){
             
 
         case "uptime":
-                let uptime = client.uptime;
+                let uptime = bot.uptime;
         
                 let days = 0;
                 let hours = 0;
