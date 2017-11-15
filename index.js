@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const superagent = require("superagent");
 const Cleverbot = require("cleverbot-node");
 const anti_spam = require("discord-anti-spam");
+const figlet = require('figlet');
 const clbot = new Cleverbot;
 const bot = new Discord.Client();
 
@@ -489,26 +490,18 @@ bot.on("message", async function(message){
             break;
 
 
-        case "userinfo":
-                let info = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-                if(!info) return message.channel.sendMessage("You did not specify a user Mention");
-            let member1 = message.mentions.members.first();
-            let mention1 = message.mentions.users.first();
-            let embeduserinfo = new Discord.RichEmbed()
-                .setDescription(`This is the info about **@${mention1.username}#${mention1.discriminator}**`)
-                .setColor(0x0AA99C)
-                .setThumbnail(`${member1.user.avatarURL}`)
-                .addField("**Username : **", `${mention1.username}`, true)
-                .addField("**User Discriminator :**", `#${mention1.discriminator}`, true)
-                .addField("**User ID :**", `${member1.id}`, true)
-                .addField("**Playing :**", `${member1.user.presence.game === null ? "No Game" : member1.user.presence.game.name}`, true) 
-                .addField("**NickName :**", `${member1.nickname}`, true)
-                .addField("**Roles :**", `${member1.roles.map(r => r.name).join(" -> ")}`)
-                .addField("**Joined Guild :**", `${message.guild.joinedAt}`)
-                .addField("**Joined Discord :**", `${member1.user.createdAt}`)
-                .setFooter(`User that triggered command -> ${message1.author.username}#${mention1.discriminator}`)
-            message.channel.send({ embed: embeduserinfo});
-            break;
+        case "ascii":
+            let data = message.content.split(" ").slice(1).join(" ");
+            if(!data) return message.reply("I cant turn nothing into ascii art!");
+          message.delete();
+            figlet(`${data}`, function(err, data) {
+              if (err) {
+                console.log('Something went wrong...');
+                console.dir(err);
+                return;
+              }
+              message.channel.send(`\`\`\`\n${data}\`\`\``);
+            })
 
         default:
             message.react('\u{26A0}') // Warning Sign
