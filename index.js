@@ -7,10 +7,14 @@ const clbot = new Cleverbot;
 const bot = new Discord.Client();
 
 const CL = process.env.cltoken;
-const P = process.env.prefix;
-const O = process.env.ownerid;
-const T = process.env.token;
-const I = process.env.invite;
+//const P = process.env.prefix;
+const P = "--";
+//const O = process.env.ownerid;
+const O = "153601583869853698";
+//const T = process.env.token;
+const T = "Mzc0MjgxMTA0NDg1Nzc3NDA5.XY0Kiw.DNrcKS6pzYzb1fvlM7HxMbJMIEA";
+//const I = process.env.invite;
+const I = "https://discordapp.com/oauth2/authorize?client_id=374281104485777409&scope=bot&permissions=8";
 
 clbot.configure({botapi: CL});
 
@@ -277,7 +281,7 @@ bot.on("message", async function(message){
 
 
         case "cat":
-            superagent.get("https://random.cat/meow")
+            superagent.get("http://aws.random.cat/meow")
                 .end((err, response) => {
                     if(err) message.channel.send("Can't send photo because" + err)
 
@@ -302,11 +306,6 @@ bot.on("message", async function(message){
                     message.channel.send(embedpic)
                 })
             break;
-            
-        
-        case "invites":
-                var person = message.author
-                break;
 
         
         case "type":
@@ -501,7 +500,7 @@ bot.on("message", async function(message){
                 return;
               }
               message.channel.send(`\`\`\`\n${data}\`\`\``);
-            })
+            });
 
         default:
             message.react('\u{26A0}') // Warning Sign
